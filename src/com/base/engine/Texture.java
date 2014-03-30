@@ -1,5 +1,10 @@
 package com.base.engine;
 
+import org.newdawn.slick.opengl.TextureLoader;
+
+import java.io.File;
+import java.io.FileInputStream;
+
 import static org.lwjgl.opengl.GL11.*;
 
 /**
@@ -20,5 +25,22 @@ public class Texture {
 
     public int getID() {
         return id;
+    }
+
+    public static Texture loadTexture(String fileName) {
+        String[] splitArray = fileName.split("\\.");
+        String ext = splitArray[splitArray.length - 1];
+
+        try {
+            int id = TextureLoader.getTexture(ext, new FileInputStream(new File("./res/textures/" + fileName))).getTextureID();
+
+            return new Texture(id);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+
+        return null;
     }
 }
