@@ -6,6 +6,7 @@ Java 3D Game Engine, thebennybox youtube series
 Playlist link: https://www.youtube.com/playlist?list=PLEETnX-uPtBXP_B2yupUKlflXBznWIlL5
 
 LWJGL version: 2.9.1
+
 OpenGL version: 3.3
 
 Working on Windows 8.1

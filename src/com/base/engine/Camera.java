@@ -29,7 +29,7 @@ public class Camera {
     Vector2f centerPosition = new Vector2f(Window.getWidth()/2, Window.getHeight()/2);
 
     public void input() {
-        float sensitivity = 0.1f;
+        float sensitivity = 0.005f;
         float moveAmt = (float)(10 * Time.getDelta());
         float rotAmt = (float)(100 * Time.getDelta());
 
@@ -96,7 +96,7 @@ public class Camera {
     public void rotateX(float angle) {
         Vector3f hAxis = yAxis.cross(forward).normalized();
 
-        forward.rotate(angle, hAxis).normalized();
+        forward = forward.rotate(angle, hAxis).normalized();
 
         up = forward.cross(hAxis).normalized();
     }
@@ -104,7 +104,7 @@ public class Camera {
     public void rotateY(float angle) {
         Vector3f hAxis = yAxis.cross(forward).normalized();
 
-        forward.rotate(angle, yAxis).normalized();
+        forward = forward.rotate(angle, yAxis).normalized();
 
         up = forward.cross(hAxis).normalized();
     }
