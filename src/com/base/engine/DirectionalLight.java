@@ -3,6 +3,7 @@ package com.base.engine;
 /**
  * Created by Jared on 3/29/2014.
  */
+
 public class DirectionalLight {
 
     private BaseLight base;
@@ -26,6 +27,6 @@ public class DirectionalLight {
     }
 
     public void setDirection(Vector3f direction) {
-        this.direction = direction;
+        this.direction = direction.normalized();
     }
 }
