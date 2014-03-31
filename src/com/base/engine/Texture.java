@@ -19,6 +19,10 @@ public class Texture {
         this.id = id;
     }
 
+    public Texture(String fileName) {
+        this(loadTexture(fileName));
+    }
+
     public void bind() {
         glBindTexture(GL_TEXTURE_2D, id);
     }
@@ -27,20 +31,20 @@ public class Texture {
         return id;
     }
 
-    public static Texture loadTexture(String fileName) {
+    private static int loadTexture(String fileName) {
         String[] splitArray = fileName.split("\\.");
         String ext = splitArray[splitArray.length - 1];
 
         try {
             int id = TextureLoader.getTexture(ext, new FileInputStream(new File("./res/textures/" + fileName))).getTextureID();
 
-            return new Texture(id);
+            return id;
 
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);
         }
 
-        return null;
+        return 0;
     }
 }

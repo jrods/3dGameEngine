@@ -47,18 +47,6 @@ public class Shader {
         uniforms.put(uniform, uniformLocation);
     }
 
-    public void addVertexShader(String text) {
-        addProgram(text, GL_VERTEX_SHADER);
-    }
-
-    public void addGeometryShader(String text) {
-        addProgram(text, GL_GEOMETRY_SHADER);
-    }
-
-    public void addFragmentShader(String text) {
-        addProgram(text, GL_FRAGMENT_SHADER);
-    }
-
     public void compileShader() {
         glLinkProgram(program);
 
@@ -94,7 +82,7 @@ public class Shader {
         glAttachShader(program, shader);
     }
 
-    public static String loadShader(String fileName) {
+    private static String loadShader(String fileName) {
         StringBuilder shaderSource = new StringBuilder();
         BufferedReader shaderReader = null;
 
@@ -131,5 +119,29 @@ public class Shader {
 
     public void setUniform(String uniformName, Matrix4f value) {
         glUniformMatrix4(uniforms.get(uniformName), true, Util.createFlippedBuffer(value));
+    }
+
+    public void addVertexShader(String text) {
+        addProgram(text, GL_VERTEX_SHADER);
+    }
+
+    public void addGeometryShader(String text) {
+        addProgram(text, GL_GEOMETRY_SHADER);
+    }
+
+    public void addFragmentShader(String text) {
+        addProgram(text, GL_FRAGMENT_SHADER);
+    }
+
+    public void addVertexShaderFromFile(String text) {
+        addProgram(loadShader(text), GL_VERTEX_SHADER);
+    }
+
+    public void addGeometryShaderFromFile(String text) {
+        addProgram(loadShader(text), GL_GEOMETRY_SHADER);
+    }
+
+    public void addFragmentShaderFromFile(String text) {
+        addProgram(loadShader(text), GL_FRAGMENT_SHADER);
     }
 }

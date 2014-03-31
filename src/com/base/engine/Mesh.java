@@ -18,17 +18,27 @@ public class Mesh {
     private int ibo;
     private int size;
 
-    public Mesh() {
+    public Mesh(String fileName) {
+        initMeshData();
+        loadMesh(fileName);
+    }
+
+    public Mesh(Vertex[] vertices, int[] indices) {
+        this(vertices, indices, false);
+    }
+
+    public Mesh(Vertex[] vertices, int[] indices, boolean calcNormals) {
+        initMeshData();
+        addVertices(vertices, indices, calcNormals);
+    }
+
+    private void initMeshData() {
         vbo = glGenBuffers();
         ibo = glGenBuffers();
         size = 0;
     }
 
-    public void addVertices(Vertex[] vertices, int[] indices) {
-        addVertices(vertices, indices, false);
-    }
-
-    public void addVertices(Vertex[] vertices, int[] indices, boolean calcNormals) {
+    private void addVertices(Vertex[] vertices, int[] indices, boolean calcNormals) {
         if(calcNormals) {
             calcNormals(vertices, indices);
         }
@@ -81,7 +91,7 @@ public class Mesh {
         }
     }
 
-    public static Mesh loadMesh(String fileName) {
+    private Mesh loadMesh(String fileName) {
         String[] splitArray = fileName.split("\\.");
         String ext = splitArray[splitArray.length - 1];
 
@@ -125,16 +135,13 @@ public class Mesh {
 
             meshReader.close();
 
-            Mesh res = new Mesh();
             Vertex[] vertexData = new Vertex[vertices.size()];
             vertices.toArray(vertexData);
 
             Integer[] indexData = new Integer[indices.size()];
             indices.toArray(indexData);
 
-            res.addVertices(vertexData, Util.toIntArray(indexData), true);
-
-            return res;
+            addVertices(vertexData, Util.toIntArray(indexData), true);
 
         } catch (Exception e) {
             e.printStackTrace();
