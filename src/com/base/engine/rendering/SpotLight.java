@@ -1,4 +1,6 @@
-package com.base.engine;
+package com.base.engine.rendering;
+
+import com.base.engine.core.Vector3f;
 
 /**
  * Created by Jared on 3/30/2014.

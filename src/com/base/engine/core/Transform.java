@@ -1,7 +1,7 @@
-package com.base.engine;
+package com.base.engine.core;
 
 
-import org.lwjgl.util.vector.Matrix;
+import com.base.engine.rendering.Camera;
 
 /**
  * Created by Jared on 3/24/2014.

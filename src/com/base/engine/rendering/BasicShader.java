@@ -1,4 +1,6 @@
-package com.base.engine;
+package com.base.engine.rendering;
+
+import com.base.engine.core.Matrix4f;
 
 /**
  * Created by Jared on 3/28/2014.

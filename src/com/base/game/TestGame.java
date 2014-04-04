@@ -1,12 +1,16 @@
-package com.base.engine;
+package com.base.game;
 
-
+import com.base.engine.core.Time;
+import com.base.engine.core.Transform;
+import com.base.engine.core.Vector2f;
+import com.base.engine.core.Vector3f;
+import com.base.engine.rendering.*;
 
 /**
  * Created by jared on 3/21/2014.
  */
 
-public class Game {
+public class TestGame implements Game {
 
     private Mesh mesh;
     private Shader shader;
@@ -22,11 +26,11 @@ public class Game {
             new Vector3f(2,0,7f), 8.0f);
 
     SpotLight sLight1 = new SpotLight(new PointLight(new BaseLight(new Vector3f(0,1f,1f), 0.8f),
-                                                                   new Attenuation(0,0,0.1f),
-                                                                   new Vector3f(-2,0,5f), 30),
-                                                     new Vector3f(1,1,1), 0.7f);
+            new Attenuation(0,0,0.1f),
+            new Vector3f(-2,0,5f), 30),
+            new Vector3f(1,1,1), 0.7f);
 
-    public Game() {
+    public void init() {
 
         material = new Material(new Texture("test.png"), new Vector3f(1.0f, 1.0f, 1.0f), 1, 16);
         shader = PhongShader.getInstance();
@@ -63,14 +67,14 @@ public class Game {
         float fieldWidth = 10.0f;
 
         Vertex[] vertices = new Vertex[]{ new Vertex(new Vector3f(-fieldWidth, 0.0f, -fieldDepth),    new Vector2f(0.0f, 0.0f)),
-                                          new Vertex(new Vector3f(-fieldWidth, 0.0f, fieldDepth * 3),  new Vector2f(0.0f, 1.0f)),
-                                          new Vertex(new Vector3f(fieldWidth * 3, 0.0f, -fieldDepth),     new Vector2f(1.0f, 0.0f)),
-                                          new Vertex(new Vector3f(fieldWidth * 3, 0.0f, fieldDepth * 3),  new Vector2f(1.0f, 1.0f))
-                                        };
+                new Vertex(new Vector3f(-fieldWidth, 0.0f, fieldDepth * 3),  new Vector2f(0.0f, 1.0f)),
+                new Vertex(new Vector3f(fieldWidth * 3, 0.0f, -fieldDepth),     new Vector2f(1.0f, 0.0f)),
+                new Vertex(new Vector3f(fieldWidth * 3, 0.0f, fieldDepth * 3),  new Vector2f(1.0f, 1.0f))
+        };
 
 
         int indices[] = { 0, 1, 2,
-                          2, 1, 3 };
+                2, 1, 3 };
 
         mesh = new Mesh(vertices, indices, true);
 
