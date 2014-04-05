@@ -7,16 +7,13 @@ import com.base.engine.rendering.*;
  * Created by jared on 3/21/2014.
  */
 
-public class TestGame implements Game {
+public class TestGame extends Game {
 
-    private Camera camera;
-
-    private GameObject root;
+    //private Camera camera;
 
     public void init() {
 
-        root = new GameObject();
-        camera = new Camera();
+        //camera = new Camera();
 
         float fieldDepth = 10.0f;
         float fieldWidth = 10.0f;
@@ -31,16 +28,21 @@ public class TestGame implements Game {
                 2, 1, 3 };
 
         Mesh mesh = new Mesh(vertices, indices, true);
-        Material material = new Material(new Texture("test.png"), new Vector3f(1.0f, 1.0f, 1.0f), 1, 16);
+        Material material = new Material(new Texture("test.png"), new Vector3f(1.0f, 1.0f, 1.0f), 1, 8);
 
         MeshRender meshRender = new MeshRender(mesh, material);
-        root.addComponent(meshRender);
 
-        Transform.setProjection(70f, Window.getWidth(), Window.getHeight(), 0.1f, 1000);
-        Transform.setCamera(camera);
+        GameObject planeObject = new GameObject();
+        planeObject.addComponent(meshRender);
+        planeObject.getTransform().setTranslation(0, -1, 5);
+
+        getRootObject().addChild(planeObject);
+
+        //Transform.setProjection(70f, Window.getWidth(), Window.getHeight(), 0.1f, 1000);
+        //Transform.setCamera(camera);
     }
 
-    public void input() {
+/*    public void input() {
         camera.input();
         root.input();
     }
@@ -53,4 +55,5 @@ public class TestGame implements Game {
     public void render() {
         root.render();
     }
+*/
 }

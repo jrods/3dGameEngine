@@ -1,5 +1,7 @@
 package com.base.engine.core;
 
+import com.base.engine.rendering.Shader;
+
 import java.util.ArrayList;
 
 /**
@@ -8,18 +10,18 @@ import java.util.ArrayList;
 
 public class GameObject {
 
-    private ArrayList<GameObject> childern;
+    private ArrayList<GameObject> children;
     private ArrayList<GameComponent> components;
     private Transform transform;
 
     public GameObject() {
-        childern = new ArrayList<>();
+        children = new ArrayList<>();
         components = new ArrayList<>();
         transform = new Transform();
     }
 
     public void addChild(GameObject child) {
-        childern.add(child);
+        children.add(child);
     }
 
     public void addComponent(GameComponent component) {
@@ -31,28 +33,28 @@ public class GameObject {
             component.input(transform);
         }
 
-        for(GameObject child : childern) {
+        for(GameObject child : children) {
             child.input();
         }
     }
 
     public void update() {
         for(GameComponent component : components) {
-            component.render(transform);
+            component.update(transform);
         }
 
-        for(GameObject child : childern) {
+        for(GameObject child : children) {
             child.update();
         }
     }
 
-    public void render() {
+    public void render(Shader shader) {
         for(GameComponent component : components) {
-            component.render(transform);
+            component.render(transform, shader);
         }
 
-        for(GameObject child : childern) {
-            child.render();
+        for(GameObject child : children) {
+            child.render(shader);
         }
     }
 

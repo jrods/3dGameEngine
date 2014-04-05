@@ -1,8 +1,6 @@
 package com.base.engine.rendering;
 
-import com.base.engine.core.Matrix4f;
-import com.base.engine.core.Util;
-import com.base.engine.core.Vector3f;
+import com.base.engine.core.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -18,6 +16,7 @@ import static org.lwjgl.opengl.GL32.*;
 
 public class Shader {
 
+    private RenderingEngine renderingEngine;
     private int program;
     private HashMap<String, Integer> uniforms;
 
@@ -35,7 +34,7 @@ public class Shader {
         glUseProgram(program);
     }
 
-    public void updateUniforms(Matrix4f worldMatrix, Matrix4f projectedMatrix, Material material) {
+    public void updateUniforms(Transform transform, Material material) {
 
     }
 
@@ -78,7 +77,7 @@ public class Shader {
         glShaderSource(shader, text);
         glCompileShader(shader);
 
-        if(glGetShader(shader, GL_COMPILE_STATUS) == 0) {
+        if(glGetShaderi(shader, GL_COMPILE_STATUS) == 0) {
             System.err.println(glGetShaderInfoLog(shader, 1024));
             System.exit(1);
         }
@@ -147,5 +146,13 @@ public class Shader {
 
     public void addFragmentShaderFromFile(String text) {
         addProgram(loadShader(text), GL_FRAGMENT_SHADER);
+    }
+
+    public void setRenderingEngine(RenderingEngine renderingEngine) {
+        this.renderingEngine = renderingEngine;
+    }
+
+    public RenderingEngine getRenderingEngine() {
+        return renderingEngine;
     }
 }
